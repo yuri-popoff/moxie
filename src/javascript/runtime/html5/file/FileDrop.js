@@ -51,6 +51,8 @@ define("moxie/runtime/html5/file/FileDrop", [
 					} else {
 						Basic.each(e.dataTransfer.files, function(file) {
 							if (_isAcceptable(file)) {
+                // Only files than directory path is /
+                file.fullPath='/'+file.name;
 								_files.push(file);
 							}
 						});
@@ -107,6 +109,7 @@ define("moxie/runtime/html5/file/FileDrop", [
 					if (entry.isFile) {
 						var file = item.getAsFile();
 						if (_isAcceptable(file)) {
+              file.fullPath=entry.fullPath;
 							_files.push(file);
 						}
 					} else {
@@ -139,6 +142,7 @@ define("moxie/runtime/html5/file/FileDrop", [
 			if (entry.isFile) {
 				entry.file(function(file) {
 					if (_isAcceptable(file)) {
+            file.fullPath=entry.fullPath;
 						_files.push(file);
 					}
 					cb();
